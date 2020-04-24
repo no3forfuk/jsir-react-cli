@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import * as redux from 'react-redux';
 
+import {Permission} from '../../api'
 
 const {connect} = redux
+
 
 interface props {
 
@@ -15,15 +17,17 @@ class Login extends Component {
     }
 
     componentDidMount(): void {
-
+        console.log(Permission);
+        //@ts-ignore
+        Permission.login({})
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
-        return <div>login</div>;
+        return <Fragment>login</Fragment>;
     }
 }
 
-const mapStateToProps = (store: object) => {
+const mapStateToProps = (store: {}) => {
     return store;
 };
 const mapDispatchToProps = (dispatch: void) => {

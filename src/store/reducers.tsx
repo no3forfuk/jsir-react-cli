@@ -5,7 +5,7 @@ interface action {
     data: any
 }
 
-const login = (state: object = {}, action: action) => {
+const login = (state: {} = {}, action: action) => {
     switch (action.type) {
         case 'LOGIN':
             return {

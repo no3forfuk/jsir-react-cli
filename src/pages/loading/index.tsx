@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,Fragment} from 'react';
 
 
 import * as redux from 'react-redux';
@@ -21,11 +21,11 @@ class Loading extends Component {
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
-        return <div>loading</div>;
+        return <Fragment>loading</Fragment>;
     }
 }
 
-const mapStateToProps = (store: object) => {
+const mapStateToProps = (store: {}) => {
     return store;
 };
 const mapDispatchToProps = (dispatch: void) => {
