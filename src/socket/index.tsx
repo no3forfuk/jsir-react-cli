@@ -8,10 +8,13 @@ interface SocketConf {
 
     onMessage?(data: any): void,
 
-    onError?(): void
+    onError?(): void,
+
+    onClose?(): void
 }
 
 class websocket {
+
     constructor(socketConf: { onMessage(message: {}): void; url: string }) {
         this.url = socketConf.url
         this.socketConf = socketConf
@@ -26,7 +29,8 @@ class websocket {
             url: this.url,
             socketMessage: this.socketMessage,
             socketError: this.socketError,
-            socketOpen: this.socketOpen
+            socketOpen: this.socketOpen,
+            socketClose: this.close
         })
         this.instence.connection()
     }
@@ -49,7 +53,10 @@ class websocket {
     public socketOpen = () => {
         this.taskRemindInterval = setInterval(() => {
             this.instence.sendMessage('ping')
-        }, 200000)
+        }, 2000)
+    }
+    private close = () => {
+
     }
 }
 

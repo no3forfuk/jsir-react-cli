@@ -1,37 +1,40 @@
 import React, {Component, Fragment} from 'react';
 import * as redux from 'react-redux';
 import SOCKET from './socket'
-import {
-    RouteComponentProps,
-} from "react-router-dom";
+
+import Storage from "./utils/storage";
 
 const {connect} = redux;
 
 // console.log(RouteComponentProps);
 
-interface Props extends RouteComponentProps {
-    // history: H.History<S>;
-    // location: H.Location<S>;
-    // match: match<Params>;
-    // staticContext?: C;
+interface Props {
+
 }
 
 
 class App extends Component {
+    private socket: any;
+
     constructor(props: Props) {
         super(props);
 
     }
 
     componentDidMount(): void {
-        let socket = new SOCKET({
+        this.socket = new SOCKET({
             url: 'ws://192.168.101.37:30080/notification/v1.0.0/ws/13412345678',
             onMessage: this.onSocketMessage
         })
-        socket.start()
+        // this.socket.start()
+        let ret = Storage.getSession('appid')
+        console.log(ret);
     }
 
     onSocketMessage = (message: {}) => {
+
+    }
+    isLogin = () => {
 
     }
 
@@ -45,7 +48,14 @@ class App extends Component {
                 history.push('/login')
             }}>login
             </button>
-            <button>loading</button>
+            <button onClick={() => {
+
+                // @ts-ignore
+                const {history} = this.props;
+                console.log(this.props);
+                history.push('/loading')
+            }}>loading
+            </button>
         </Fragment>;
     }
 }

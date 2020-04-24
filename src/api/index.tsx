@@ -1,10 +1,11 @@
 import permission from './permission'
 import _fetch from './request'
 
+
 interface Module {
     name: string,
 
-    [api: string]: any
+    [api: string]: Object | Function
 }
 
 interface ApiParam {
@@ -18,6 +19,12 @@ interface ApiParam {
 const moduleList: Array<Module> = [
     permission
 ]
+
+interface LooseObject {
+    [key: string]: any
+}
+
+const moduleListCopy: LooseObject = {}
 
 const getApiUrl = (url: string, apiParam: ApiParam) => {
     const {path, query} = apiParam
@@ -42,11 +49,13 @@ const getApiUrl = (url: string, apiParam: ApiParam) => {
 }
 const createApiFoo = () => {
     moduleList.map((module: Module) => {
+        moduleListCopy[module.name] = {}
         for (let k in module) {
             if (k === 'name') {
 
             } else {
-                module[k] = (params: any) => {
+                // @ts-ignore
+                moduleListCopy[module.name][k] = (params: {}) => {
                     return _fetch({
                         // @ts-ignore
                         url: getApiUrl(module[k].url, params)
@@ -57,5 +66,5 @@ const createApiFoo = () => {
     })
 }
 createApiFoo()
-export const Permission = permission
+export const Permission = moduleListCopy['permission']
 

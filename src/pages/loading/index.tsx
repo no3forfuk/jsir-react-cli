@@ -2,6 +2,7 @@ import React, {Component,Fragment} from 'react';
 
 
 import * as redux from 'react-redux';
+import {Permission} from '../../api'
 
 const {connect} = redux
 

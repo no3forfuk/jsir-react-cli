@@ -18,7 +18,6 @@ class Login extends Component {
 
     componentDidMount(): void {
         console.log(Permission);
-        //@ts-ignore
         Permission.login({})
     }
 
