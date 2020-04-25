@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import store from './store'
 import * as serviceWorker from './serviceWorker';
 import * as redux from 'react-redux';
-
+import 'antd/dist/antd.css';
 import RouterConf from "./router";
+import './static/css/base.css'
 
 const {Provider} = redux
 
 ReactDOM.render(
     <Provider store={store}>
-        <React.StrictMode>
-            <RouterConf/>
-        </React.StrictMode>
+        <RouterConf/>
     </Provider>,
     document.getElementById('root')
 );

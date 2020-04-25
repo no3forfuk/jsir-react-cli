@@ -5,6 +5,11 @@ import SOCKET from './socket';
 import {LOGIN_SWITCH, LOADING_SWITCH, SOCKET_SWITCH} from './switch';
 import {storage, timeFormat} from './utils'
 import {socketConf} from "./env";
+import routes from './router/routes'
+import {
+    Switch,
+    Route
+} from "react-router-dom";
 
 const {connect} = redux;
 
@@ -13,8 +18,12 @@ interface Props {
 
 }
 
+interface State {
+
+}
 
 class App extends Component {
+
     private socket: any;
 
     constructor(props: Props) {
@@ -22,7 +31,10 @@ class App extends Component {
 
     }
 
+    state: State = {}
+
     componentDidMount(): void {
+
         this.isLogin()
     }
 
@@ -40,8 +52,6 @@ class App extends Component {
         } else {
             if (LOGIN_SWITCH) {
                 history.replace('/login')
-            } else {
-                history.replace('/')
             }
         }
     };
@@ -54,24 +64,26 @@ class App extends Component {
         });
         this.socket.start();
     };
+    renderRouter = () => {
+        const AppRouter = routes.find(item => item.path === '/');
+        return <Switch>
+            {
+                AppRouter && AppRouter.routes.map((item, index) => {
+                    return <Route path={item.path}
+                        //@ts-ignore
+                                  component={item.component}
+                                  key={index}>
+                    </Route>
+                })
+            }
+        </Switch>
+    }
 
     public render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return <Fragment>
-            <button onClick={() => {
-
-                // @ts-ignore
-                const {history} = this.props;
-                history.push('/login')
-            }}>login
-            </button>
-            <button onClick={() => {
-
-                // @ts-ignore
-                const {history} = this.props;
-                console.log(this.props);
-                history.push('/loading')
-            }}>loading
-            </button>
+            {
+                this.renderRouter()
+            }
         </Fragment>;
     }
 }

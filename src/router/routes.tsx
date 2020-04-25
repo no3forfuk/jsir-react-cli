@@ -5,25 +5,33 @@ import React from "react";
 
 interface route {
     path: string,
-    component: React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined
+    component: React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined,
+    routes: Array<{
+        path: string;
+        component: React.ReactElement,
+    }>,
+    exact?: boolean
 }
 
 const routes: Array<route> = [
     {
         path: "/login",
-        component: Login
-    },
-    {
-        path: "/loading",
-        component: Loading,
+        component: Login,
+        routes: []
     },
     {
         path: "/",
-        component: App
+        component: App,
+        exact: true,
+        routes: [{
+            path: "/loading",
+            component: Loading,
+        }]
     },
     {
         path: "*",
-        component: Login
+        component: Login,
+        routes: []
     },
 ]
 export default routes

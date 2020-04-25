@@ -9,7 +9,12 @@ declare module 'react-transition-group' {
     export = content
 }
 
+interface CloudRender {
+    [key: string]: any
+}
 
 interface Window {
-    countRequest: number
+    countRequest: number,
+    cloudRender: CloudRender,
+    cloudRenderer: any
 }

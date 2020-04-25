@@ -5,4 +5,5 @@ const ENV = process.env.NODE_ENV;
 
 
 export const socketConf = ENV === 'development' ? dev.socketConf : prod.socketConf;
+export const cloudRenderConf = ENV === 'development' ? dev.cloudRender : prod.cloudRender;
 

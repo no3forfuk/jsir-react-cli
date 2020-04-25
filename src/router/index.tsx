@@ -3,9 +3,7 @@ import routes from './routes'
 import {
     HashRouter,
     Switch,
-    Route,
-    withRouter,
-    RouteComponentProps
+    Route
 } from "react-router-dom";
 import * as redux from 'react-redux';
 

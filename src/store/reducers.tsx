@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 
 interface action {
     type: string,
-    data: any
+    data?: any
 }
 
 const login = (state: {} = {}, action: action) => {

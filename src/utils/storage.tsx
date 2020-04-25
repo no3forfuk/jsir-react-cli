@@ -8,7 +8,7 @@ class Storage {
         }
     }
 
-    getSession = (key: string): string | Object | undefined => {
+    getSession = (key: string): string | { [key: string]: any } | undefined => {
         let ret = sessionStorage.getItem(key)
         if (ret) {
             try {
@@ -27,7 +27,7 @@ class Storage {
         }
     }
 
-    getLocal = (key: string): string | Object | undefined => {
+    getLocal = (key: string): string | { [key: string]: any } | undefined => {
         let ret = localStorage.getItem(key)
         if (ret) {
             try {

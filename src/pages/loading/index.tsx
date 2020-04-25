@@ -1,28 +1,63 @@
-import React, {Component,Fragment} from 'react';
-
+import React, {Component, Fragment} from 'react';
+import './index.less'
 
 import * as redux from 'react-redux';
-import {Permission} from '../../api'
 
-const {connect} = redux
+const {connect} = redux;
 
-interface props {
+interface Props {
 
+}
+
+interface State {
+    percent: number
 }
 
 
 class Loading extends Component {
-    constructor(props: props) {
+
+    static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+
+    }
+
+    constructor(props: Props) {
         super(props);
 
     }
 
-    componentDidMount(): void {
+    state: State = {
+        percent: 0
+    };
+    totwoty: any = null
+    tofivety: any = null
+    toninety: any = null
+    timeOutLazy: any = null
 
+    componentDidMount(): void {
+        this.init()
+    }
+
+    init = () => {
+        let num = 0
+        this.totwoty = setInterval(() => {
+            if (num === 20) {
+                clearInterval(this.totwoty)
+            }
+            num += 1
+            this.setState({
+                percent: num
+            })
+        }, 200)
     }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
-        return <Fragment>loading</Fragment>;
+        return <Fragment>
+            <div className="page-container loading-page">
+                <img src={require('../../static/images/loadinggif.gif')} style={{width: '100%', height: '100%'}}
+                     alt=""/>
+                <span className="loading-page-precess">{this.state.percent}%</span>
+            </div>
+        </Fragment>;
     }
 }
 
@@ -33,5 +68,5 @@ const mapDispatchToProps = (dispatch: void) => {
     return {
         dispatch
     }
-}
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Loading);

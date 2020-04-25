@@ -1,4 +1,5 @@
 import permission from './permission'
+import searchImg from './searchImg'
 import _fetch from './request'
 
 
@@ -20,7 +21,8 @@ interface RequestParam {
 }
 
 const moduleList: Array<Module> = [
-    permission
+    permission,
+    searchImg
 ]
 
 interface LooseObject {
@@ -73,4 +75,5 @@ const createApiFoo = () => {
 }
 createApiFoo()
 export const Permission = moduleListCopy['permission']
+export const SearchImg = moduleListCopy['searchImg']
 
