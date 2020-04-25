@@ -1,6 +1,6 @@
 class Storage {
 
-    static setSession<T>(key: string, value: T): void {
+    setSession<T>(key: string, value: T): void {
         if (typeof value === 'string') {
             sessionStorage.setItem(key, value)
         } else {
@@ -8,7 +8,7 @@ class Storage {
         }
     }
 
-    static getSession = (key: string): void => {
+    getSession = (key: string): string | Object | undefined => {
         let ret = sessionStorage.getItem(key)
         if (ret) {
             try {
@@ -19,7 +19,7 @@ class Storage {
         }
     }
 
-    static setLocal<T>(key: string, value: T): void {
+    setLocal<T>(key: string, value: T): void {
         if (typeof value === 'string') {
             localStorage.setItem(key, value)
         } else {
@@ -27,7 +27,7 @@ class Storage {
         }
     }
 
-    static getLocal = (key: string): void => {
+    getLocal = (key: string): string | Object | undefined => {
         let ret = localStorage.getItem(key)
         if (ret) {
             try {
@@ -38,7 +38,7 @@ class Storage {
         }
     }
 
-    static clearSession(key: string | undefined) {
+    clearSession(key?: string | undefined): void {
         if (key) {
             sessionStorage.removeItem(key)
         } else {
@@ -46,7 +46,7 @@ class Storage {
         }
     }
 
-    static clearLocal(key: string | undefined) {
+    clearLocal(key?: string | undefined): void {
         if (key) {
             localStorage.removeItem(key)
         } else {

@@ -17,7 +17,6 @@ class Login extends Component {
     }
 
     componentDidMount(): void {
-        console.log(Permission);
         Permission.login({})
     }
 

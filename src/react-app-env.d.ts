@@ -8,3 +8,8 @@ declare module 'react-transition-group' {
     const content: any
     export = content
 }
+
+
+interface Window {
+    countRequest: number
+}

@@ -1,4 +1,3 @@
-import {strict} from "assert";
 
 interface SocketProp {
     reconnectCount?: number,

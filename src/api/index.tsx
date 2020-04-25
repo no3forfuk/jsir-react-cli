@@ -5,7 +5,7 @@ import _fetch from './request'
 interface Module {
     name: string,
 
-    [api: string]: Object | Function
+    [api: string]: any
 }
 
 interface ApiParam {
@@ -15,6 +15,9 @@ interface ApiParam {
     headers?: Object
 }
 
+interface RequestParam {
+    [api: string]: any
+}
 
 const moduleList: Array<Module> = [
     permission
@@ -54,11 +57,14 @@ const createApiFoo = () => {
             if (k === 'name') {
 
             } else {
-                // @ts-ignore
-                moduleListCopy[module.name][k] = (params: {}) => {
+                moduleListCopy[module.name][k] = (params: RequestParam) => {
                     return _fetch({
-                        // @ts-ignore
-                        url: getApiUrl(module[k].url, params)
+                        url: getApiUrl(module[k].url, params),
+                        method: module[k].method,
+                        headers: module[k].headers || {},
+                        body: {data: params.body},
+                        userId: params.userId,
+                        isFormData: module[k].formData || false
                     })
                 }
             }
